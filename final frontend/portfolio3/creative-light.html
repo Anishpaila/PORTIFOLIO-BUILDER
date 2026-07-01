@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Tech Minimal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=SF+Mono:wght@300;400;500&family=Manrope:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #fefefe;
+        --bg-secondary: #f8f9fa;
+        --bg-tertiary: #ffffff;
+        --text-primary: #1a1a1a;
+        --text-secondary: #6b7280;
+        --text-muted: #9ca3af;
+        --accent: #2563eb;
+        --accent-hover: #1d4ed8;
+        --accent-light: #dbeafe;
+        --border: #e5e7eb;
+        --border-light: #f3f4f6;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        font-weight: 300;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* Header */
+      .header {
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: rgba(254, 254, 254, 0.95);
+        backdrop-filter: blur(20px);
+        z-index: 100;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 60px;
+      }
+
+      .logo {
+        font-family: "SF Mono", "JetBrains Mono", monospace;
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--text-primary);
+        letter-spacing: -0.5px;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 3rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 400;
+        transition: all 0.2s ease;
+        position: relative;
+        letter-spacing: -0.25px;
+      }
+
+      .nav-links a:hover {
+        color: var(--text-primary);
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 8rem 0 6rem;
+        text-align: left;
+      }
+
+      .hero-content {
+        max-width: 800px;
+      }
+
+      .hero h1 {
+        font-family: "Manrope", sans-serif;
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 200;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+        letter-spacing: -2px;
+        line-height: 1.1;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease 0.2s forwards;
+      }
+
+      .hero .subtitle {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        font-weight: 400;
+        letter-spacing: -0.5px;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease 0.4s forwards;
+      }
+
+      .hero .bio {
+        font-size: 1rem;
+        color: var(--text-muted);
+        margin-bottom: 3rem;
+        line-height: 1.7;
+        font-weight: 300;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease 0.6s forwards;
+      }
+
+      /* Photo */
+      .profile-photo {
+        width: 400px;
+        height: 400px;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        opacity: 0;
+        animation: fadeInScale 1s ease 0.8s forwards;
+      }
+
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .profile-photo:hover img {
+        transform: scale(1.05);
+      }
+
+      /* Sections */
+      .section {
+        padding: 5rem 0;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .section-title {
+        font-family: "Manrope", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 3rem;
+        color: var(--text-primary);
+        letter-spacing: -1px;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      /* Skills */
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .skill-tag {
+        background: var(--bg-tertiary);
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        font-size: 0.875rem;
+        font-weight: 400;
+        transition: all 0.2s ease;
+        opacity: 0;
+        animation: fadeInUp 0.6s ease forwards;
+        letter-spacing: -0.25px;
+      }
+
+      .skill-tag:hover {
+        background: var(--accent-light);
+        border-color: var(--accent);
+        transform: translateY(-1px);
+      }
+
+      /* Projects */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+        box-shadow: var(--shadow);
+      }
+
+      .project-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .project-card h3 {
+        font-family: "Manrope", sans-serif;
+        font-size: 1.125rem;
+        font-weight: 500;
+        margin-bottom: 0.75rem;
+        color: var(--text-primary);
+        letter-spacing: -0.5px;
+      }
+
+      .project-card p {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.6;
+        font-weight: 300;
+      }
+
+      /* Services */
+      .services-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .service-item {
+        background: var(--bg-tertiary);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        opacity: 0;
+        animation: fadeInUp 0.6s ease forwards;
+        transition: all 0.2s ease;
+        text-align: center;
+      }
+
+      .service-item:hover {
+        border-color: var(--accent);
+        transform: translateY(-1px);
+      }
+
+      .service-item h3 {
+        font-family: "Manrope", sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.5px;
+      }
+
+      .service-item p {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        font-weight: 300;
+      }
+
+      /* Contact */
+      .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .contact-item {
+        opacity: 0;
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      .contact-item h3 {
+        font-family: "Manrope", sans-serif;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .contact-item p,
+      .contact-item a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: -0.25px;
+      }
+
+      .contact-item a:hover {
+        color: var(--accent);
+      }
+
+      /* Social Links */
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin: 3rem 0;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+        opacity: 0;
+        animation: fadeInUp 0.6s ease forwards;
+        font-size: 0.875rem;
+        font-weight: 400;
+      }
+
+      .social-link:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: white;
+        transform: translateY(-1px);
+      }
+
+      /* Footer */
+      .footer {
+        padding: 3rem 0;
+        text-align: center;
+        color: var(--text-muted);
+        border-top: 1px solid var(--border-light);
+        font-size: 0.875rem;
+        font-weight: 300;
+      }
+
+      /* Resume Download */
+      .resume-download {
+        margin: 2rem 0;
+      }
+
+      .download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--accent);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+        font-size: 0.875rem;
+        font-weight: 400;
+        letter-spacing: -0.25px;
+      }
+
+      .download-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInScale {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding: 4rem 0 3rem;
+          text-align: center;
+        }
+
+        .section {
+          padding: 3rem 0;
+        }
+
+        .skills-grid {
+          justify-content: center;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-info {
+          grid-template-columns: 1fr;
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+      }
+
+      /* Staggered animation delays */
+      .skill-tag:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .skill-tag:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      .skill-tag:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .skill-tag:nth-child(4) {
+        animation-delay: 0.25s;
+      }
+      .skill-tag:nth-child(5) {
+        animation-delay: 0.3s;
+      }
+      .skill-tag:nth-child(6) {
+        animation-delay: 0.35s;
+      }
+
+      .project-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .project-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .project-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .service-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .service-item:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      .service-item:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+
+      .contact-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .contact-item:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      .contact-item:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+
+      .social-link:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .social-link:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      .social-link:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .social-link:nth-child(4) {
+        animation-delay: 0.25s;
+      }
+      .social-link:nth-child(5) {
+        animation-delay: 0.3s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <div class="logo" id="portfolio-name">portfolio</div>
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+  <!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <!-- Profile Photo -->
+      <div class="profile-photo" id="profile-photo" style="display: none">
+        <img id="photo-display" src="" alt="Profile Photo" />
+      </div>
+
+      <h1 id="name-display">Your Name</h1>
+      <p class="subtitle">Full Stack Developer</p>
+      <p class="bio" id="bio-display">
+        Building digital experiences with clean code and thoughtful design.
+        Focused on creating solutions that matter.
+      </p>
+
+      <!-- Resume Download -->
+      <div class="resume-download" id="resume-section" style="display: none">
+        <a href="#" class="download-btn" id="resume-link">
+          <span>↓</span> Download Resume
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="skills-grid" id="skills-grid">
+          <!-- Skills will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="projects-grid" id="projects-grid">
+          <!-- Projects will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+      <div class="container">
+        <h2 class="section-title">What I Do</h2>
+        <div class="services-list" id="services-list">
+          <!-- Services will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-info" id="contact-info">
+          <!-- Contact info will be populated here -->
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-links" id="social-links">
+          <!-- Social links will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p id="footer-text">Crafted with precision and care</p>
+      </div>
+    </footer>
+
+   
+ <script>
+  function populatePortfolio(data) {
+    // Default demo data if no form data exists
+    const defaultData = {
+      name: "Alex Chen",
+      email: "alex@example.com",
+      phone: "+1 (555) 123-4567",
+      bio: "Full-stack developer specializing in React, Node.js, and cloud architecture. I build scalable applications with clean, maintainable code and focus on user experience.",
+      profession: "Full Stack Developer",
+      skills: [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Python",
+        "AWS",
+        "Docker",
+        "GraphQL",
+      ],
+      projects: ["SaaS Dashboard", "E-commerce API", "Mobile App"],
+      services: ["Full Stack Development", "API Development", "Cloud Architecture"],
+      education: "B.S. Computer Science, MIT 2021",
+      experience: "2+ years",
+      address: "San Francisco, CA",
+      linkedin: "https://linkedin.com/in/alexchen",
+      github: "https://github.com/alexchen",
+      twitter: "https://twitter.com/alexchen",
+      instagram: "https://instagram.com/alexchen",
+      facebook: "https://facebook.com/alexchen",
+      resumeName: "sample_resume.pdf",
+      photoURL: "https://images.unsplash.com/photo-147209964575-5658abf4f400&h=400&fit=crop&crop=face"
+    };
+
+    // Merge with provided data, prioritizing form data
+    const finalData = { ...defaultData, ...data };
+
+    // Populate name
+    const nameDisplay = document.getElementById("name-display");
+    const logoDisplay = document.getElementById("portfolio-name");
+    if (finalData.name) {
+      nameDisplay.textContent = finalData.name;
+      logoDisplay.textContent = finalData.name.toLowerCase().replace(/\s+/g, "");
+    }
+
+    // Populate profession (subtitle)
+    const subtitle = document.querySelector(".subtitle");
+    if (finalData.profession) {
+      subtitle.textContent = finalData.profession;
+    }
+
+    // Populate bio
+    const bioDisplay = document.getElementById("bio-display");
+    if (finalData.bio) {
+      bioDisplay.textContent = finalData.bio;
+    }
+
+    // Populate photo
+    const profilePhoto = document.getElementById("profile-photo");
+    const photoDisplay = document.getElementById("photo-display");
+    if (finalData.photoURL || finalData.photoDataUrl) {
+      photoDisplay.src = finalData.photoURL || finalData.photoDataUrl;
+      profilePhoto.style.display = "block";
+    }
+
+    // Populate resume
+    const resumeSection = document.getElementById("resume-section");
+    const resumeLink = document.getElementById("resume-link");
+    if (finalData.resumeName) {
+      resumeSection.style.display = "block";
+      if (finalData.resumeDataUrl) {
+        resumeLink.href = finalData.resumeDataUrl;
+        resumeLink.setAttribute("download", finalData.resumeName);
+        resumeLink.addEventListener("click", function (e) {
+          e.preventDefault();
+          const link = document.createElement("a");
+          link.href = finalData.resumeDataUrl || "#";
+          link.download = finalData.resumeName || "resume.pdf";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      } else {
+        resumeLink.onclick = function (e) {
+          e.preventDefault();
+          alert("Resume file not available for download.");
+        };
+      }
+    }
+
+    // Populate skills
+    const skillsGrid = document.getElementById("skills-grid");
+    if (skillsGrid && finalData.skills) {
+      skillsGrid.innerHTML = (typeof finalData.skills === "string" ? finalData.skills.split(",").map(s => s.trim()) : finalData.skills)
+        .map((skill) => `<div class="skill-tag">${skill}</div>`)
+        .join("");
+    }
+
+    // Populate projects
+    const projectsGrid = document.getElementById("projects-grid");
+    if (projectsGrid && finalData.projects) {
+      projectsGrid.innerHTML = (typeof finalData.projects === "string" ? finalData.projects.split(",").map(p => p.trim()) : finalData.projects)
+        .map(
+          (project) => `
+            <div class="project-card">
+              <h3>${project}</h3>
+              <p>Clean, scalable solution built with modern technologies and best practices.</p>
+            </div>`
+        )
+        .join("");
+    }
+
+    // Populate services
+    const servicesList = document.getElementById("services-list");
+    if (servicesList && finalData.services) {
+      servicesList.innerHTML = (typeof finalData.services === "string" ? finalData.services.split(",").map(s => s.trim()) : finalData.services)
+        .map(
+          (service) => `
+            <div class="service-item">
+              <h3>${service}</h3>
+              <p>Professional ${service.toLowerCase()} services</p>
+            </div>`
+        )
+        .join("");
+    }
+
+    // Populate contact info
+    const contactInfo = document.getElementById("contact-info");
+    const contactItems = [];
+    if (finalData.email) contactItems.push(`
+      <div class="contact-item">
+        <h3>Email</h3>
+        <a href="mailto:${finalData.email}">${finalData.email}</a>
+      </div>
+    `);
+    if (finalData.phone) contactItems.push(`
+      <div class="contact-item">
+        <h3>Phone</h3>
+        <a href="tel:${finalData.phone}">${finalData.phone}</a>
+      </div>
+    `);
+    if (finalData.address) contactItems.push(`
+      <div class="contact-item">
+        <h3>Location</h3>
+        <p>${finalData.address}</p>
+      </div>
+    `);
+    if (finalData.education) contactItems.push(`
+      <div class="contact-item">
+        <h3>Education</h3>
+        <p>${finalData.education}</p>
+      </div>
+    `);
+    if (finalData.experience) contactItems.push(`
+      <div class="contact-item">
+        <h3>Experience</h3>
+        <p>${finalData.experience}</p>
+      </div>
+    `);
+    if (contactInfo) contactInfo.innerHTML = contactItems.join("");
+
+    // Populate social links
+    const socialLinks = document.getElementById("social-links");
+    if (socialLinks) {
+      const socials = { linkedin: "li", github: "gh", twitter: "tw", instagram: "ig", facebook: "fb" };
+      socialLinks.innerHTML = Object.entries(socials)
+        .filter(([key]) => finalData[key])
+        .map(([key, label]) => `<a href="${finalData[key]}" class="social-link" target="_blank">${label}</a>`)
+        .join("");
+    }
+
+    // Update footer
+    const footerText = document.getElementById("footer-text");
+    if (finalData.name) {
+      footerText.textContent = `© 2025 ${finalData.name}. Crafted with precision and care.`;
+    }
+  }
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+
+  // Initialize portfolio on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPreview = urlParams.get("preview") === "true";
+    let portfolioData = JSON.parse(localStorage.getItem("portfolio_data") || "{}");
+
+    // If no data in localStorage or in preview mode, use default demo data
+    if (Object.keys(portfolioData).length === 0 || isPreview) {
+      portfolioData = {
+        name: "Alex Chen",
+        bio: "Full-stack developer specializing in React, Node.js, and cloud architecture. I build scalable applications with clean, maintainable code and focus on user experience.",
+        profession: "Full Stack Developer",
+        email: "alex@example.com",
+        phone: "+1 (555) 123-4567",
+        skills: ["JavaScript", "TypeScript", "React", "Node.js", "Python", "AWS", "Docker", "GraphQL"],
+        projects: ["SaaS Dashboard", "E-commerce API", "Mobile App"],
+        services: ["Full Stack Development", "API Development", "Cloud Architecture"],
+        education: "B.S. Computer Science, MIT 2021",
+        experience: "2+ years",
+        address: "San Francisco, CA",
+        linkedin: "https://linkedin.com/in/alexchen",
+        github: "https://github.com/alexchen",
+        twitter: "https://twitter.com/alexchen",
+        instagram: "https://instagram.com/alexchen",
+        facebook: "https://facebook.com/alexchen",
+        resumeName: "sample_resume.pdf",
+        photoURL: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
+      };
+    }
+
+    populatePortfolio(portfolioData);
+  });
+</script>
+    </script>
+  </body>
+</html>

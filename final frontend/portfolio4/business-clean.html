@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Pulse - Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #f5f7fa; /* Light gray background */
+        --bg-secondary: #ffffff; /* Pure white for cards */
+        --text-primary: #1a2e44; /* Deep navy text */
+        --text-secondary: #6c7a8d; /* Soft gray for secondary text */
+        --accent: #d4a373; /* Warm gold accent */
+        --accent-hover: #b88d5f; /* Darker gold hover */
+        --border: #e0e6ed; /* Light border */
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        --shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* Header */
+      .header {
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Roboto Mono", monospace;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 400;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 8rem 0 6rem;
+        text-align: left;
+        background: linear-gradient(135deg, var(--bg-primary), #e9eef4);
+      }
+
+      .hero-content {
+        max-width: 800px;
+      }
+
+      .profile-photo {
+        width: 400px;
+        height: 400px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 2px solid var(--border);
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+        float: left;
+        margin-right: 2rem;
+      }
+
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profile-photo:hover {
+        transform: scale(1.02);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+      }
+
+      .hero .subtitle {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        font-weight: 400;
+      }
+
+      .hero .bio {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        max-width: 600px;
+      }
+
+      .resume-download {
+        margin: 2rem 0;
+      }
+
+      .download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--accent);
+        color: white;
+        padding: 0.9rem 2rem;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .download-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+      }
+
+      /* Sections */
+      .section {
+        padding: 5rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 2.5rem;
+        text-align: center;
+        letter-spacing: -0.5px;
+      }
+
+      /* Skills */
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      .skill-tag {
+        background: var(--bg-secondary);
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .skill-tag:hover {
+        background: var(--accent-light);
+        border-color: var(--accent);
+        transform: translateY(-5px);
+      }
+
+      /* Projects */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+      }
+
+      .project-card:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-5px);
+      }
+
+      .project-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .project-card p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+
+      /* Services */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .service-card {
+        text-align: center;
+        padding: 1.5rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .service-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-5px);
+      }
+
+      .service-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .service-card p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      /* Contact */
+      .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .contact-item h3 {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+      }
+
+      .contact-item p,
+      .contact-item a {
+        font-size: 1rem;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .contact-item a:hover {
+        color: var(--accent);
+      }
+
+      /* Social Links */
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin: 3rem 0;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        background: var(--accent);
+        color: white;
+        transform: scale(1.1);
+      }
+
+      /* Footer */
+      .footer {
+        padding: 2.5rem 0;
+        text-align: center;
+        color: var(--text-secondary);
+        border-top: 1px solid var(--border);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding: 4rem 0;
+          text-align: center;
+        }
+
+        .profile-photo {
+          float: none;
+          margin: 0 auto 2rem;
+          width: 250px;
+          height: 250px;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <div class="logo" id="portfolio-name">Premium Pulse</div>
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+      <div class="container">
+        <div class="hero-content">
+          <div class="profile-photo" id="profile-photo" style="display: none">
+            <img id="photo-display" src="" alt="Profile Photo" />
+          </div>
+          <div>
+            <h1 id="name-display">Your Name</h1>
+            <p class="subtitle" id="subtitle">Full Stack Developer</p>
+            <p class="bio" id="bio-display">
+              Crafting innovative digital solutions with a passion for
+              technology and design.
+            </p>
+            <div
+              class="resume-download"
+              id="resume-section"
+              style="display: none"
+            >
+              <a href="#" class="download-btn" id="resume-link">
+                <span>↓</span> Download Resume
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="skills-grid" id="skills-grid">
+          <!-- Skills will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="projects-grid" id="projects-grid">
+          <!-- Projects will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+      <div class="container">
+        <h2 class="section-title">What I Do</h2>
+        <div class="services-grid" id="services-list">
+          <!-- Services will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-info" id="contact-info">
+          <!-- Contact info will be populated here -->
+        </div>
+        <div class="social-links" id="social-links">
+          <!-- Social links will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p id="footer-text">© 2025 Your Name. Built with dedication.</p>
+      </div>
+    </footer>
+
+    <script>
+      function populatePortfolio(data) {
+        const defaultData = {
+          name: "Jane Doe",
+          profession: "Senior Developer",
+          bio: "Innovative developer with expertise in full-stack technologies and creative problem-solving.",
+          email: "jane@example.com",
+          phone: "+1 (555) 987-6543",
+          skills: [
+            "JavaScript",
+            "React",
+            "Node.js",
+            "Python",
+            "AWS",
+            "GraphQL",
+          ],
+          projects: ["AI Chatbot", "E-commerce Platform", "Dashboard App"],
+          services: ["Web Development", "Cloud Solutions", "API Design"],
+          education: "M.S. Computer Science, Stanford 2022",
+          experience: "4+ years",
+          address: "Austin, TX",
+          linkedin: "https://linkedin.com/in/janedoe",
+          github: "https://github.com/janedoe",
+          twitter: "https://twitter.com/janedoe",
+          resumeName: "jane_resume.pdf",
+          photoURL:
+            "https://images.unsplash.com/photo-14947901-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+        };
+
+        const finalData = { ...defaultData, ...data };
+
+        // Populate name and logo
+        document.getElementById("name-display").textContent = finalData.name;
+        document.getElementById("portfolio-name").textContent = finalData.name
+          .toLowerCase()
+          .replace(/\s+/g, "");
+
+        // Populate profession
+        document.getElementById("subtitle").textContent = finalData.profession;
+
+        // Populate bio
+        document.getElementById("bio-display").textContent = finalData.bio;
+
+        // Populate photo
+        const profilePhoto = document.getElementById("profile-photo");
+        const photoDisplay = document.getElementById("photo-display");
+        if (finalData.photoURL) {
+          photoDisplay.src = finalData.photoURL;
+          profilePhoto.style.display = "block";
+        }
+
+        // Populate resume
+        const resumeSection = document.getElementById("resume-section");
+        const resumeLink = document.getElementById("resume-link");
+        if (finalData.resumeName) {
+          resumeSection.style.display = "block";
+          if (finalData.resumeDataUrl) {
+            resumeLink.href = finalData.resumeDataUrl;
+            resumeLink.setAttribute("download", finalData.resumeName);
+            resumeLink.addEventListener("click", function (e) {
+              e.preventDefault();
+              const link = document.createElement("a");
+              link.href = finalData.resumeDataUrl || "#";
+              link.download = finalData.resumeName || "resume.pdf";
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            });
+          } else {
+            resumeLink.onclick = function (e) {
+              e.preventDefault();
+              alert("Resume file not available for download.");
+            };
+          }
+        }
+
+        // Populate skills
+        const skillsGrid = document.getElementById("skills-grid");
+        if (skillsGrid && finalData.skills) {
+          skillsGrid.innerHTML = (
+            typeof finalData.skills === "string"
+              ? finalData.skills.split(",").map((s) => s.trim())
+              : finalData.skills
+          )
+            .map((skill) => `<div class="skill-tag">${skill}</div>`)
+            .join("");
+        }
+
+        // Populate projects
+        const projectsGrid = document.getElementById("projects-grid");
+        if (projectsGrid && finalData.projects) {
+          projectsGrid.innerHTML = (
+            typeof finalData.projects === "string"
+              ? finalData.projects.split(",").map((p) => p.trim())
+              : finalData.projects
+          )
+            .map(
+              (project) => `
+                <div class="project-card">
+                  <h3>${project}</h3>
+                  <p>A showcase of modern tech and design innovation.</p>
+                </div>
+              `
+            )
+            .join("");
+        }
+
+        // Populate services
+        const servicesList = document.getElementById("services-list");
+        if (servicesList && finalData.services) {
+          servicesList.innerHTML = (
+            typeof finalData.services === "string"
+              ? finalData.services.split(",").map((s) => s.trim())
+              : finalData.services
+          )
+            .map(
+              (service) => `
+                <div class="service-card">
+                  <h3>${service}</h3>
+                  <p>Expert ${service.toLowerCase()} solutions.</p>
+                </div>
+              `
+            )
+            .join("");
+        }
+
+        // Populate contact info
+        const contactInfo = document.getElementById("contact-info");
+        const contactItems = [];
+        if (finalData.email)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Email</h3>
+              <a href="mailto:${finalData.email}">${finalData.email}</a>
+            </div>
+          `);
+        if (finalData.phone)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Phone</h3>
+              <a href="tel:${finalData.phone}">${finalData.phone}</a>
+            </div>
+          `);
+        if (finalData.address)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Location</h3>
+              <p>${finalData.address}</p>
+            </div>
+          `);
+        if (finalData.education)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Education</h3>
+              <p>${finalData.education}</p>
+            </div>
+          `);
+        if (finalData.experience)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Experience</h3>
+              <p>${finalData.experience}</p>
+            </div>
+          `);
+        if (contactInfo) contactInfo.innerHTML = contactItems.join("");
+
+        // Populate social links
+        const socialLinks = document.getElementById("social-links");
+        if (socialLinks) {
+          const socials = {
+            linkedin: "in",
+            github: "gh",
+            twitter: "tw",
+            instagram: "ig",
+            facebook: "fb",
+          };
+          socialLinks.innerHTML = Object.entries(socials)
+            .filter(([key]) => finalData[key])
+            .map(
+              ([key, label]) =>
+                `<a href="${finalData[key]}" class="social-link" target="_blank">${label}</a>`
+            )
+            .join("");
+        }
+
+        // Update footer
+        document.getElementById(
+          "footer-text"
+        ).textContent = `© 2025 ${finalData.name}. Built with dedication.`;
+      }
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Initialize portfolio
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const isPreview = urlParams.get("preview") === "true";
+        let portfolioData = JSON.parse(
+          localStorage.getItem("portfolio_data") || "{}"
+        );
+
+        if (Object.keys(portfolioData).length === 0 || isPreview) {
+          portfolioData = {
+            name: "Jane Doe",
+            profession: "Senior Developer",
+            bio: "Innovative developer with expertise in full-stack technologies and creative problem-solving.",
+            email: "jane@example.com",
+            phone: "+1 (555) 987-6543",
+            skills: [
+              "JavaScript",
+              "React",
+              "Node.js",
+              "Python",
+              "AWS",
+              "GraphQL",
+            ],
+            projects: ["AI Chatbot", "E-commerce Platform", "Dashboard App"],
+            services: ["Web Development", "Cloud Solutions", "API Design"],
+            education: "M.S. Computer Science, Stanford 2022",
+            experience: "4+ years",
+            address: "Austin, TX",
+            linkedin: "https://linkedin.com/in/janedoe",
+            github: "https://github.com/janedoe",
+            twitter: "https://twitter.com/janedoe",
+            instagram: "https://instagram.com/janedoe",
+            facebook: "https://facebook.com/janedoe",
+            resumeName: "jane_resume.pdf",
+            photoURL:
+              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+          };
+        }
+
+        populatePortfolio(portfolioData);
+      });
+    </script>
+  </body>
+</html>

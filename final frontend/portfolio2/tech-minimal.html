@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neon Nexus - Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #0f0f23; /* Deep cosmic blue */
+        --bg-secondary: #1a1a3d; /* Midnight purple */
+        --bg-tertiary: #2e2e5a; /* Dusk indigo */
+        --text-primary: #e0f7fa; /* Icy teal */
+        --text-secondary: #b2ebf2; /* Light cyan */
+        --text-muted: #80deea; /* Soft aqua */
+        --accent-primary: #ff6f61; /* Coral glow */
+        --accent-secondary: #ff8a65; /* Salmon burst */
+        --accent-tertiary: #ffab91; /* Peach shimmer */
+        --accent-gold: #ffd54f; /* Golden flare */
+        --border: #3d3d6a; /* Dark twilight */
+        --border-light: #5a5a8a; /* Pale twilight */
+        --shadow: 0 4px 15px rgba(255, 111, 97, 0.2);
+        --shadow-glow: 0 0 15px rgba(255, 111, 97, 0.1);
+        --gradient-primary: linear-gradient(135deg, #ff6f61, #ff8a65);
+        --gradient-secondary: linear-gradient(135deg, #ffab91, #ffd54f);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* Header */
+      .header {
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: rgba(15, 15, 35, 0.95);
+        backdrop-filter: blur(20px);
+        z-index: 100;
+        box-shadow: var(--shadow-glow);
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent-primary);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 8rem 0 6rem;
+        text-align: left;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(255, 111, 97, 0.1) 0%,
+          transparent 70%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,111,97,0.1)"/></svg>')
+          repeat;
+        opacity: 0.3;
+        animation: float 20s infinite linear;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        100% {
+          transform: translateY(-100px);
+        }
+      }
+
+      .hero-content {
+        max-width: 800px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .profile-photo {
+        width: 350px;
+        height: 350px;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 3px solid var(--border-light);
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow), var(--shadow-glow);
+        transition: all 0.3s ease;
+        float: left;
+        margin-right: 2.5rem;
+        position: relative;
+      }
+
+      .profile-photo::before {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        background: var(--gradient-primary);
+        border-radius: 20px;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .profile-photo:hover::before {
+        opacity: 1;
+      }
+
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profile-photo:hover {
+        transform: scale(1.02);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        letter-spacing: -2px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero .subtitle {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+      }
+
+      .hero .bio {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        line-height: 1.7;
+      }
+
+      .resume-download {
+        margin: 2rem 0;
+      }
+
+      .download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--gradient-primary);
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+      }
+
+      .download-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(255, 111, 97, 0.3);
+      }
+
+      /* Sections */
+      .section {
+        padding: 6rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 3rem;
+        text-align: center;
+        letter-spacing: -1px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Projects */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        justify-items: center;
+      }
+
+      .project-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 350px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--gradient-primary);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 15px;
+      }
+
+      .project-card:hover::before {
+        opacity: 0.1;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow), 0 0 25px rgba(255, 111, 97, 0.2);
+        border-color: var(--accent-primary);
+      }
+
+      .project-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+        color: var(--text-primary);
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .project-card p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        flex-grow: 1;
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        justify-content: center;
+      }
+
+      .tech-tag {
+        background: var(--bg-tertiary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        color: var(--accent-secondary);
+        border: 1px solid var(--border);
+      }
+
+      /* Services */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        justify-items: center;
+        align-items: stretch;
+      }
+
+      .service-card {
+        text-align: center;
+        padding: 2rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--gradient-secondary);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .service-card:hover::before {
+        opacity: 0.1;
+      }
+
+      .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow);
+        border-color: var(--accent-tertiary);
+      }
+
+      .service-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-secondary);
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        position: relative;
+        z-index: 1;
+      }
+
+      .service-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+        position: relative;
+        z-index: 1;
+      }
+
+      .service-card p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        position: relative;
+        z-index: 1;
+        flex-grow: 1;
+      }
+
+      /* Contact */
+      .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .contact-item {
+        background: var(--bg-secondary);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .contact-item:hover {
+        background: var(--bg-tertiary);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow);
+      }
+
+      .contact-item h3 {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .contact-item p,
+      .contact-item a {
+        font-size: 1rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .contact-item a:hover {
+        color: var(--accent-primary);
+      }
+
+      /* Social Links */
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin: 3rem 0;
+      }
+
+      .social-link {
+        width: 50px;
+        height: 50px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 1.2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .social-link::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--gradient-primary);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .social-link:hover::before {
+        opacity: 1;
+      }
+
+      .social-link:hover {
+        color: white;
+        transform: scale(1.1);
+        box-shadow: var(--shadow);
+      }
+
+      .social-link span {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 3rem 0;
+        text-align: center;
+        color: var(--text-muted);
+        border-top: 1px solid var(--border);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding: 4rem 0;
+          text-align: center;
+        }
+
+        .profile-photo {
+          float: none;
+          margin: 0 auto 2rem;
+          width: 250px;
+          height: 250px;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Animations */
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 15px rgba(255, 111, 97, 0.1);
+        }
+        50% {
+          box-shadow: 0 0 25px rgba(255, 111, 97, 0.3);
+        }
+        100% {
+          box-shadow: 0 0 15px rgba(255, 111, 97, 0.1);
+        }
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 111, 97, 0.3) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: glow 3s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <div class="logo" id="portfolio-name">NeonNexus</div>
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+      <div class="container">
+        <div class="hero-content">
+          <div class="profile-photo" id="profile-photo" style="display: none">
+            <img id="photo-display" src="" alt="Profile Photo" />
+          </div>
+          <div>
+            <h1 id="name-display">Alex Chen</h1>
+            <p class="subtitle" id="subtitle">Senior Backend Engineer</p>
+            <p class="bio" id="bio-display">
+              Architecting scalable systems and building robust APIs that power
+              modern applications. Passionate about cloud infrastructure,
+              microservices, and high-performance computing.
+            </p>
+            <div
+              class="resume-download"
+              id="resume-section"
+              style="display: none"
+            >
+              <a href="#" class="download-btn" id="resume-link">
+                <span>↓</span> Download Resume
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid" id="projects-grid">
+          <!-- Projects will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+      <div class="container">
+        <h2 class="section-title">What I Deliver</h2>
+        <div class="services-grid" id="services-list">
+          <!-- Services will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-info" id="contact-info">
+          <!-- Contact info will be populated here -->
+        </div>
+        <div class="social-links" id="social-links">
+          <!-- Social links will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p id="footer-text">© 2025 Alex Chen. Crafted with precision.</p>
+      </div>
+    </footer>
+
+    <script>
+      function populatePortfolio(data) {
+        const defaultData = {
+          name: "Jane Doe",
+          profession: "Senior Developer",
+          bio: "Innovative developer with expertise in full-stack technologies and creative problem-solving.",
+          email: "jane@example.com",
+          phone: "+1 (555) 987-6543",
+          skills: [
+            "JavaScript",
+            "React",
+            "Node.js",
+            "Python",
+            "AWS",
+            "GraphQL",
+          ],
+          projects: ["AI Chatbot", "E-commerce Platform", "Dashboard App"],
+          services: ["Web Development", "Cloud Solutions", "API Design"],
+          education: "M.S. Computer Science, Stanford 2022",
+          experience: "4+ years",
+          address: "Austin, TX",
+          linkedin: "https://linkedin.com/in/janedoe",
+          github: "https://github.com/janedoe",
+          twitter: "https://twitter.com/janedoe",
+          resumeName: "jane_resume.pdf",
+          photoURL:
+            "https://images.unsplash/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+        };
+
+        const finalData = { ...defaultData, ...data };
+
+        // Populate name and logo
+        document.getElementById("name-display").textContent = finalData.name;
+        document.getElementById("portfolio-name").textContent = finalData.name
+          .toLowerCase()
+          .replace(/\s+/g, "");
+
+        // Populate profession
+        document.getElementById("subtitle").textContent = finalData.profession;
+
+        // Populate bio
+        document.getElementById("bio-display").textContent = finalData.bio;
+
+        // Populate photo
+        const profilePhoto = document.getElementById("profile-photo");
+        const photoDisplay = document.getElementById("photo-display");
+        if (finalData.photoURL) {
+          photoDisplay.src = finalData.photoURL;
+          profilePhoto.style.display = "block";
+        }
+
+        // Populate resume
+        const resumeSection = document.getElementById("resume-section");
+        const resumeLink = document.getElementById("resume-link");
+        if (finalData.resumeName) {
+          resumeSection.style.display = "block";
+          if (finalData.resumeDataUrl) {
+            resumeLink.href = finalData.resumeDataUrl;
+            resumeLink.setAttribute("download", finalData.resumeName);
+            resumeLink.addEventListener("click", function (e) {
+              e.preventDefault();
+              const link = document.createElement("a");
+              link.href = finalData.resumeDataUrl || "#";
+              link.download = finalData.resumeName || "resume.pdf";
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            });
+          } else {
+            resumeLink.onclick = function (e) {
+              e.preventDefault();
+              alert("Resume file not available for download.");
+            };
+          }
+        }
+
+        // Populate projects
+        const projectsGrid = document.getElementById("projects-grid");
+        if (projectsGrid && finalData.projects) {
+          projectsGrid.innerHTML = (
+            typeof finalData.projects === "string"
+              ? finalData.projects.split(",").map((p) => p.trim())
+              : finalData.projects
+          )
+            .map(
+              (project) => `
+                <div class="project-card">
+                  <h3>${project}</h3>
+                  <p>A showcase of modern tech and design innovation.</p>
+                </div>
+              `
+            )
+            .join("");
+        }
+
+        // Populate services
+        const servicesList = document.getElementById("services-list");
+        if (servicesList && finalData.services) {
+          servicesList.innerHTML = (
+            typeof finalData.services === "string"
+              ? finalData.services.split(",").map((s) => s.trim())
+              : finalData.services
+          )
+            .map(
+              (service) => `
+                <div class="service-card">
+                  <h3>${service}</h3>
+                  <p>Expert ${service.toLowerCase()} solutions.</p>
+                </div>
+              `
+            )
+            .join("");
+        }
+
+        // Populate contact info
+        const contactInfo = document.getElementById("contact-info");
+        const contactItems = [];
+        if (finalData.email)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Email</h3>
+              <a href="mailto:${finalData.email}">${finalData.email}</a>
+            </div>
+          `);
+        if (finalData.phone)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Phone</h3>
+              <a href="tel:${finalData.phone}">${finalData.phone}</a>
+            </div>
+          `);
+        if (finalData.address)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Location</h3>
+              <p>${finalData.address}</p>
+            </div>
+          `);
+        if (finalData.education)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Education</h3>
+              <p>${finalData.education}</p>
+            </div>
+          `);
+        if (finalData.experience)
+          contactItems.push(`
+            <div class="contact-item">
+              <h3>Experience</h3>
+              <p>${finalData.experience}</p>
+            </div>
+          `);
+        if (contactInfo) contactInfo.innerHTML = contactItems.join("");
+
+        // Populate social links
+        const socialLinks = document.getElementById("social-links");
+        if (socialLinks) {
+          const socials = {
+            linkedin: "in",
+            github: "gh",
+            twitter: "tw",
+            instagram: "ig",
+            facebook: "fb",
+          };
+          socialLinks.innerHTML = Object.entries(socials)
+            .filter(([key]) => finalData[key])
+            .map(
+              ([key, label]) =>
+                `<a href="${finalData[key]}" class="social-link" target="_blank">${label}</a>`
+            )
+            .join("");
+        }
+
+        // Update footer
+        document.getElementById(
+          "footer-text"
+        ).textContent = `© 2025 ${finalData.name}. Crafted with precision.`;
+      }
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Initialize portfolio
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const isPreview = urlParams.get("preview") === "true";
+        let portfolioData = JSON.parse(
+          localStorage.getItem("portfolio_data") || "{}"
+        );
+
+        if (Object.keys(portfolioData).length === 0 || isPreview) {
+          portfolioData = {
+            name: "Alex Chen",
+            profession: "Senior Backend Engineer",
+            bio: "Architecting scalable systems and building robust APIs that power modern applications. Passionate about cloud infrastructure, microservices, and high-performance computing.",
+            email: "alex.chen@example.com",
+            phone: "+1 (555) 123-4567",
+            projects: [
+              {
+                title: "Distributed Payment System",
+                description:
+                  "Built a high-throughput payment processing system handling 10M+ transactions daily with 99.99% uptime.",
+                technologies: ["Go", "PostgreSQL", "Redis", "Kafka", "AWS"],
+              },
+              {
+                title: "Real-time Analytics Engine",
+                description:
+                  "Developed a streaming analytics platform processing 100GB+ data per hour with sub-second latency.",
+                technologies: [
+                  "Python",
+                  "Apache Spark",
+                  "Kafka",
+                  "Cassandra",
+                  "Docker",
+                ],
+              },
+              {
+                title: "API Gateway & Service Mesh",
+                description:
+                  "Architected a comprehensive API gateway serving 50+ microservices with advanced routing and security.",
+                technologies: [
+                  "Java",
+                  "Spring Boot",
+                  "Istio",
+                  "Kubernetes",
+                  "Envoy",
+                ],
+              },
+            ],
+            services: [
+              {
+                title: "System Architecture",
+                description:
+                  "Design scalable, maintainable system architectures for enterprise applications.",
+                icon: "🏗️",
+              },
+              {
+                title: "API Development",
+                description:
+                  "Create robust, well-documented APIs that scale with your business needs.",
+                icon: "🔌",
+              },
+              {
+                title: "Cloud Infrastructure",
+                description:
+                  "Deploy and optimize cloud-native solutions for maximum performance.",
+                icon: "☁️",
+              },
+              {
+                title: "Performance Optimization",
+                description:
+                  "Identify bottlenecks and optimize systems for peak performance.",
+                icon: "⚡",
+              },
+            ],
+            education: "M.S. Computer Science, MIT 2020",
+            experience: "6+ years",
+            address: "San Francisco, CA",
+            linkedin: "https://linkedin.com/in/alexchen",
+            github: "https://github.com/alexchen",
+            twitter: "https://twitter.com/alexchen",
+            resumeName: "alex_chen_resume.pdf",
+            photoURL:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+          };
+        }
+
+        populatePortfolio(portfolioData);
+      });
+    </script>
+  </body>
+</html>

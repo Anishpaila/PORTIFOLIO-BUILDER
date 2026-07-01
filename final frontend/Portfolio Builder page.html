@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Builders - Resume Analyzer</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(270deg, #ff6ec4, #7873f5, #42e695, #30cfd0);
+            background-size: 800% 800%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        .content-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 60px 40px 80px; /* extra bottom space for button */
+            border-radius: 30px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            max-width: 550px;
+            width: 90%;
+            position: relative;
+        }
+
+        .content-box:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .icon-circle {
+            background: linear-gradient(45deg, #00dbde, #fc00ff);
+            border-radius: 50%;
+            padding: 20px;
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-analyze {
+            background: linear-gradient(45deg, #00dbde, #fc00ff);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: 0.4s;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .btn-analyze:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="file"] {
+            background: #fff;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            width: 100%;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .btn-create-portfolio, .btn-template-preview {
+            border: 2px solid white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+            transition: 0.4s;
+            font-size: 14px;
+        }
+
+        .btn-create-portfolio:hover, .btn-template-preview:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Position template preview at bottom-right inside content box */
+        .btn-template-preview {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content-box">
+    <div class="icon-circle">
+        <i class="fas fa-file-alt"></i>
+    </div>
+    <h1>Portfolio Builders</h1>
+    <p class="lead">Boost your career with AI-powered resume analysis</p>
+
+    <div id="result" class="mt-4"></div>
+
+    <a href="Create Portfolio.html" class="btn-create-portfolio">Create Portfolio</a>
+
+    <!-- Template Preview Button (styled like Create Portfolio, but smaller) -->
+    <a href="Choose template.html" class="btn-template-preview">Template Preview</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function analyzeResume() {
+        const fileInput = document.getElementById('resumeInput');
+        const result = document.getElementById('result');
+        if (fileInput.files.length === 0) {
+            result.innerHTML = "<div class='alert alert-warning mt-3'>Please upload your resume first.</div>";
+            return;
+        }
+        result.innerHTML = "<div class='alert alert-success mt-3'>Resume uploaded successfully! Analyzing... (Mock analysis)</div>";
+    }
+</script>
+
+</body>
+</html>
